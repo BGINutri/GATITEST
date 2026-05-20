@@ -161,25 +161,44 @@
         }
         .nav-buttons {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
-            gap: 12px;
+            gap: 8px;
             margin-top: 8px;
         }
         .btn {
             background: rgba(255,250,240,0.8);
             border: 1.5px solid #dac09f;
-            padding: 14px 16px;
+            padding: 12px 12px;
             border-radius: 60px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #543b26;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             transition: 0.2s;
             flex: 1;
+            min-height: 48px;  /* 手机端更容易点击 */
+        }
+        /* 手机屏幕时缩小内边距和间距 */
+        @media (max-width: 500px) {
+            .nav-buttons {
+                gap: 6px;
+            }
+            .btn {
+                padding: 10px 8px;
+                font-size: 0.8rem;
+                gap: 4px;
+            }
+            .restart-btn {
+                flex: 0.6;
+            }
+            .btn-primary {
+                flex: 1.2;
+            }
         }
         .btn-primary {
             background: #c08c5c;
@@ -376,7 +395,7 @@
             <div class="action-group">
                 <button class="btn restart-btn" id="retakeFromResultBtn" style="flex:1;"><i class="fas fa-undo-alt"></i> 重新探索</button>
             </div>
-            <p style="margin-top: 18px; font-size:0.75rem; opacity:0.7;"><i class="far fa-comment-dots"></i> 肠格测试仅供娱乐，更多肠道信息可购买华大益人益方产品</p>
+            <p style="margin-top: 18px; font-size:0.75rem; opacity:0.7;"><i class="far fa-comment-dots"></i> 肠格测试仅供娱乐，欲了解更多肠道信息可购买华大益人益方产品</p>
         </div>
     </div>
     <!-- 底部无任何“根据真实饮食习惯...”文字 -->

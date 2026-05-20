@@ -546,6 +546,10 @@
                 if(firstNull !== -1) { currentIndex = firstNull; renderQuestion(); }
                 return;
             }
+            // 防止重复提交
+            if (window._dataSubmitted) return;
+            window._dataSubmitted = true;
+            
             // 计算分数
             let rawScores = [0,0,0,0];
             for(let i=0; i<questions.length; i++) {
@@ -577,6 +581,29 @@
             
             // 绘制条状图 (不再额外显示独立分数列表)
             renderDimensionBars(rawScores);
+
+            // ========== 静默提交数据到 Google Sheets ==========
+            const scriptUrl = 'https://script.google.com/macros/s/你的ID/exec'; // 替换这里！！！
+    
+            let sessionId = sessionStorage.getItem('submitted_session');
+            if (!sessionId) {
+                sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('submitted_session', sessionId);
+            }
+            const submitData = {
+                sessionId: sessionId,
+                answers: answers,
+                scores: rawScores,
+                finalCode: finalCode
+            };
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(submitData)
+            }).catch(e => console.log('数据提交失败', e));
+            // ========== 结束静默提交 ==========
+    
             
             testSection.classList.add('hidden');
             resultSection.classList.remove('hidden');

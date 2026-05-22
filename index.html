@@ -555,7 +555,7 @@
             }
             const typeChars = [];
             for(let i=0;i<4;i++) {
-                typeChars.push(rawScores[i] > 12 ? dimensions[i].left : dimensions[i].right);
+                typeChars.push(rawScores[i] > 10 ? dimensions[i].left : dimensions[i].right);
             }
             const finalCode = typeChars.join('');
             const typeData = typeMap[finalCode] || { nickname: "神秘肠格", slogan: "待解锁", desc: "独特肠道人格。" };
